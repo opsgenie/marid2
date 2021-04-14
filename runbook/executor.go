@@ -51,6 +51,7 @@ func Execute(executablePath string, args, environmentVars []string, stdout, stde
 	cmd.Stderr = stderrBuff
 	if stderr != nil {
 		cmd.Stderr = io.MultiWriter(stderr, cmd.Stderr)
+		defer stderr.Close()
 	}
 	if stdout != nil {
 		cmd.Stdout = stdout
